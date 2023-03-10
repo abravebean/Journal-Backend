@@ -9,7 +9,7 @@ const app = express()
 
 
 //DATABASE CONECTION
-const CONNECTION_URL = 'mongodb+srv://Kevinawesome12:Pu3YSAEkKT3nDrMx@cluster0.dm1y5fi.mongodb.net/journal?retryWrites=true&w=majority'
+const { CONNECTION_URL } = process.env
 const PORT = process.env.PORT || 5000
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => app.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}`)))
