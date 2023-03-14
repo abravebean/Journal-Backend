@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const JournalSchema = new mongoose.Schema({
     date: {type:Date,
-    default: new Date("<YYYY-mm-dd>")},
+    default:  Date.now},
     note: String,
     picture: String,
     

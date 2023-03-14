@@ -30,7 +30,7 @@ mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: tr
 
 //middleware
 app.use(cors()) //prevents cross origin resource sharing error, allows access to the server from all the origin, react frontend
-app.use(morgan("dev")) // loggs details of all server hits to terminal
+
 app.use(express.json()) // parse json bodies from request
 app.use(express.urlencoded({extended:false})); // URL encoded
 
@@ -78,7 +78,7 @@ app.delete("/journal/:id", async (req, res) => {
 //update route
 app.put("/journal/:id", async (req, res) => {
   try {
-    // send updated person
+    // send updated Journal
     res.json(
       await JournalSchema.findByIdAndUpdate(req.params.id, req.body, { new: true })
     )

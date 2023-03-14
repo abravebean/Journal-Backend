@@ -1,20 +1,20 @@
 import express from 'express';
 import mongoose from 'mongoose';
-
+import { useDispatch } from 'react-redux';
 import JournalSchema from '../models/journal.js';
 
 const router = express.Router();
 
 export const getPosts = async (req, res) => {
     const { page } = req.query;
-    
+    const dispatch = useDispatch();
     try {
         const LIMIT = 8;
         const startIndex = (Number(page) - 1) * LIMIT; // get the starting index of every page
-    
+        dispatch({ type: FETCH_POST, payload: { post: data } });
         const total = await JournalSchema.countDocuments({});
         const posts = await JournalSchema.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex);
-
+        dispatch({ type: START_LOADING });
         res.json({ data: posts, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
     } catch (error) {    
         res.status(404).json({ message: error.message });
@@ -29,7 +29,8 @@ export const getPost = async (req, res) => {
 
     try {
         const post = await JournalSchema.findById(id);
-        
+        dispatch({ type: FETCH_BY_CREATOR, payload: { data } });
+        dispatch({ type: END_LOADING });
         res.status(200).json(post);
     } catch (error) {
         res.status(404).json({ message: error.message });
