@@ -1,14 +1,13 @@
 const mongoose = require("mongoose");
 
-const journalSchema = new mongoose.Schema({
+const JournalSchema = new mongoose.Schema({
     date: {type:Date,
     default: new Date("<YYYY-mm-dd>")},
     note: String,
     picture: String,
-    tags: [String],
-    selectedFile:String,
+    
   })
 
-  const JournalSchema = mongoose.model("Journal", journalSchema)
+  const Journal = mongoose.model("Journal", JournalSchema)
 
-module.exports = JournalSchema
+module.exports = Journal

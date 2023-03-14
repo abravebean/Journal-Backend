@@ -6,7 +6,6 @@ const cors = require("cors");
 const JournalSchema = require('./models/journal.js');
 const bodyParser = require('body-parser');
 // import postRoutes from './routes/post.js'
-// require('dotenv').config()
 
 
 const app = express()
@@ -30,10 +29,10 @@ mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: tr
 
 
 //middleware
-// app.use(bodyParser.json({ extended:true}));
-app.use(express.urlencoded({ extended: true }))
-app.use(cors())
-
+app.use(cors()) //prevents cross origin resource sharing error, allows access to the server from all the origin, react frontend
+app.use(morgan("dev")) // loggs details of all server hits to terminal
+app.use(express.json()) // parse json bodies from request
+app.use(express.urlencoded({extended:false})); // URL encoded
 
 
 //ROUTES
